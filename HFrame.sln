@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{9FADC422-AB08-4B22-9B58-A5F553B1ED4E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonHelper", "CommonHelper\CommonHelper.csproj", "{15EB4996-6B82-4671-8F96-F3A61B8BEAE4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonModel", "CommonModel\CommonModel.csproj", "{6EE33958-0805-4342-9243-1CFD033C2F07}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlSugarData", "SqlSugarData\SqlSugarData.csproj", "{70B1FBDD-5430-4CE9-8D5F-572C5A45CF00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9FADC422-AB08-4B22-9B58-A5F553B1ED4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9FADC422-AB08-4B22-9B58-A5F553B1ED4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9FADC422-AB08-4B22-9B58-A5F553B1ED4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9FADC422-AB08-4B22-9B58-A5F553B1ED4E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15EB4996-6B82-4671-8F96-F3A61B8BEAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15EB4996-6B82-4671-8F96-F3A61B8BEAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15EB4996-6B82-4671-8F96-F3A61B8BEAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,10 +21,6 @@ Global
 		{6EE33958-0805-4342-9243-1CFD033C2F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE33958-0805-4342-9243-1CFD033C2F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE33958-0805-4342-9243-1CFD033C2F07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70B1FBDD-5430-4CE9-8D5F-572C5A45CF00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70B1FBDD-5430-4CE9-8D5F-572C5A45CF00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70B1FBDD-5430-4CE9-8D5F-572C5A45CF00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70B1FBDD-5430-4CE9-8D5F-572C5A45CF00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
