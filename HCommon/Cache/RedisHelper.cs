@@ -7,20 +7,23 @@ using System.Text;
 
 namespace HCommon.Cache
 {
-    public class RedisHelper: CacheModel
+    public class RedisHelper : CacheModel
     {
-        #region 构造函数
-        public RedisHelper() => ConnectPath = "127.0.0.1:6379";
-        public RedisHelper(string Path) => ConnectPath = Path;
-        #endregion
+        #region 属性
         /// <summary>
         /// 连接对象
         /// </summary>
-        public static IConnectionMultiplexer Connect => ConnectionMultiplexer.Connect("127.0.0.1:6379");
+        public IConnectionMultiplexer Connect => ConnectionMultiplexer.Connect("127.0.0.1:6379");
         /// <summary>
         /// 链接数据
         /// </summary>
-        public static IDatabase DataBase => Connect.GetDatabase();
+        public IDatabase DataBase => Connect.GetDatabase();
+        #endregion
+
+        #region 构造函数
+        public RedisHelper() { }
+        public RedisHelper(string Path) : base(Path) { }
+        #endregion
 
         #region 方法
         /// <summary>
@@ -28,7 +31,7 @@ namespace HCommon.Cache
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static object Get(string key)
+        public override object Get(string key)
         {
             return Get<object>(key);
         }
@@ -38,7 +41,7 @@ namespace HCommon.Cache
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static T Get<T>(string key)where T:class,new()
+        public override T Get<T>(string key)
         {
             var value = default(T);///默认返回值
             var cacheValue = DataBase.StringGet(key);
@@ -53,47 +56,47 @@ namespace HCommon.Cache
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
-        public static void Insert(string key, object data)
+        public override bool Insert(string key, object data)
         {
             lock (_lockeder)
             {
                 var JsonData = JsonHelper.ToJson(data);
-                DataBase.StringSet(key, JsonData);
+                return DataBase.StringSet(key, JsonData);
             }
         }
-        public static void Insert(string key, object data, int MaxTime)
+        public override bool Insert(string key, object data, int MaxTime)
         {
             lock (_lockeder)
             {
                 var timeSpan = TimeSpan.FromSeconds(MaxTime);
                 var jsonData = JsonHelper.ToJson(data);
-                DataBase.StringSet(key, jsonData, timeSpan);
+                return DataBase.StringSet(key, jsonData, timeSpan);
             }
         }
-        public static void Insert(string key, object data, DateTime EndTime)
+        public override bool Insert(string key, object data, DateTime EndTime)
         {
             lock (_lockeder)
             {
                 var timeSpan = EndTime - DateTime.Now;
                 var jsonData = JsonHelper.ToJson(data);
-                DataBase.StringSet(key, jsonData, timeSpan);
+                return DataBase.StringSet(key, jsonData, timeSpan);
             }
         }
         /// <summary>
         /// 删除对象
         /// </summary>
         /// <param name="key"></param>
-        public static void Remove(string key)
+        public override bool Remove(string key)
         {
             lock (_lockeder)
             {
-                DataBase.KeyDelete(key);
+                return DataBase.KeyDelete(key);
             }
         }
         /// <summary>
         /// 判断key是否存在
         /// </summary>
-        public static bool Exists(string key)
+        public override bool Exists(string key)
         {
             return DataBase.KeyExists(key);
         }

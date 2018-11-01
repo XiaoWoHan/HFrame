@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheHelper.cs" />
     <Compile Include="Cache\CacheModel.cs" />
     <Compile Include="Helper\EventHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
