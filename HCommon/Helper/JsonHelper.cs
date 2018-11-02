@@ -6,8 +6,11 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace HCommon.Helper
+namespace HFrame.Common.Helper
 {
+    /// <summary>
+    /// Json帮助类
+    /// </summary>
     public static class JsonHelper
     {
         #region 序列化

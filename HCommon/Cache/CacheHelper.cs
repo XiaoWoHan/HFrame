@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HCommon.Cache
+namespace HFrame.Common.Cache
 {
     /// <summary>
     /// 基于HashTable读写缓存

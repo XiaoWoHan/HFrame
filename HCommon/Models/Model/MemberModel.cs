@@ -1,6 +1,6 @@
-﻿using HCommon.Model.Enum;
+﻿using HFrame.Common.Model.Enum;
 
-namespace HCommon.Model
+namespace HFrame.Common.Model
 {
     public class MemberModel
     {

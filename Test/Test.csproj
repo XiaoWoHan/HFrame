@@ -49,9 +49,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HCommon\HCommon.csproj">
+    <ProjectReference Include="..\HCommon\HFrame.Common.csproj">
       <Project>{c025578c-464e-46e3-a0b7-fd3c85a8e77c}</Project>
-      <Name>HCommon</Name>
+      <Name>HFrame.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,8 @@
-﻿using HCommon.Helper;
-using Newtonsoft.Json;
+﻿using HFrame.Common.Helper;
 using StackExchange.Redis;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace HCommon.Cache
+namespace HFrame.Common.Cache
 {
     /// <summary>
     /// 基于Redis读写缓存

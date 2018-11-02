@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace HCommon.Helper
+namespace HFrame.Common.Helper
 {
+    /// <summary>
+    /// 字符串帮助类
+    /// </summary>
     public static class StringHelper
     {
         #region 字符串长度

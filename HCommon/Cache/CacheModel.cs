@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HCommon.Cache
+namespace HFrame.Common.Cache
 {
     public abstract class CacheModel<T> where T: CacheModel<T>,new()
     {

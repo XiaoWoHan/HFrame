@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace HCommon.Helper
+namespace HFrame.Common.Helper
 {
     /// <summary>
     /// 加密算法封装

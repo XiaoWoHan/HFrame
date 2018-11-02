@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HCommon.Helper
+namespace HFrame.Common.Helper
 {
+    /// <summary>
+    /// 枚举帮助类
+    /// </summary>
     public class EnumHelper
     {
         /// <summary>
@@ -51,18 +55,31 @@ namespace HCommon.Helper
             {
                 dic.Add(item.ToString(), (int)item);
             }
-
             return dic;
         }
         /// <summary>
         /// 获取指定枚举成员的描述
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="obj">枚举值</param>
+        /// <param name="nameInstead">当枚举值没有定义DescriptionAttribute，是否使用枚举名代替，默认是使用</param>
         /// <returns></returns>
-        public static string ToDescriptionString(Enum obj)
+        public static string ToDescriptionString(Enum obj,bool nameInstead = true)
         {
-            var attribs = (DescriptionAttribute[])obj.GetType().GetField(obj.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-            return attribs.Length > 0 ? attribs[0].Description : obj.ToString();
+            Type type = obj.GetType();
+            string name = Enum.GetName(type, obj);
+            if (name == null)
+            {
+                return null;
+            }
+
+            FieldInfo field = type.GetField(name);
+            DescriptionAttribute attribute = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+
+            if (attribute == null && nameInstead == true)
+            {
+                return name;
+            }
+            return attribute == null ? null : attribute.Description;
         }
     }
 }

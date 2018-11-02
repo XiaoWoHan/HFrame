@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HCommon.Helper
+namespace HFrame.Common.Helper
 {
     public delegate void FileWatchEventHandler(object sender, EventArgs e);
     class EventHelper

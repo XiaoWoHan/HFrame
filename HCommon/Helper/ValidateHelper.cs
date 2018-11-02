@@ -5,9 +5,12 @@ using System.Text.RegularExpressions;
 /* *
 * 验证帮助类
 * */
-namespace HCommon.Helper
+namespace HFrame.Common.Helper
 {
-    class ValidateHelper
+    /// <summary>
+    /// 正则验证帮助类
+    /// </summary>
+    public class ValidateHelper
     {
         //邮件正则表达式
         private static Regex _emailregex = new Regex(@"^[a-z0-9]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$", RegexOptions.IgnoreCase);

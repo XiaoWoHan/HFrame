@@ -5,7 +5,7 @@ using System.Text;
 /*
  * 登陆状态
  */
-namespace HCommon.Model.Enum
+namespace HFrame.Common.Model.Enum
 {
     public enum EnumLoginType
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HCommon.Model
+namespace HFrame.Common.Model
 {
     public class ResultModel
     {

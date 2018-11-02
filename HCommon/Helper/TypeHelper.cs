@@ -4,8 +4,11 @@ using System.Text;
 /* *
  * 类型帮助类
  * */
-namespace HCommon.Helper
+namespace HFrame.Common.Helper
 {
+    /// <summary>
+    /// 类型帮助类
+    /// </summary>
     class TypeHelper
     {
         #region 转换时间型

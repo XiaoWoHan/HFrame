@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace HCommon.Helper
+namespace HFrame.Common.Helper
 {
     /*
      * XML帮助类
