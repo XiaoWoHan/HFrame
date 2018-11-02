@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HCommon.Cache
 {
-    public abstract class CacheModel
+    public abstract class CacheModel<T> where T: CacheModel<T>,new()
     {
         #region 属性
         /// <summary>
@@ -17,10 +17,14 @@ namespace HCommon.Cache
         /// 链接字符串
         /// </summary>
         protected string ConnectPath { get; set; }
+        /// <summary>
+        /// 当前默认对象
+        /// </summary>
+        public static CacheModel<T> Current => new T();
         #endregion
 
         #region 构造函数
-        public CacheModel() => ConnectPath = "127.0.0.1:6379";
+        public CacheModel() { }
         public CacheModel(string Path) => ConnectPath = Path;
         #endregion
 
@@ -34,16 +38,21 @@ namespace HCommon.Cache
         /// <summary>
         /// 获取对象
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public abstract T Get<T>(string key) where T : class, new();
+        public abstract T1 Get<T1>(string key) where T1:class,new();
         /// <summary>
         /// 插入对象
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
-        public abstract bool Insert(string key, object data);
+        public abstract bool Add(string key, object data);
+        /// <summary>
+        /// 插入对象
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="data"></param>
+        public abstract bool AddOrUpdate(string key, object data);
         /// <summary>
         /// 删除对象
         /// </summary>

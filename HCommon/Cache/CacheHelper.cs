@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,14 @@ using System.Threading.Tasks;
 
 namespace HCommon.Cache
 {
-    class CacheHelper : CacheModel
+    public class CacheHelper : CacheModel<CacheHelper>
     {
-        private static ConcurrentDictionary<string, object> _cachemodel = new ConcurrentDictionary<string, object>();
+        #region 属性
+        /// <summary>
+        /// 存储空间
+        /// </summary>
+        private static Hashtable _cachemodel = new Hashtable();
+        #endregion
 
         #region 方法
         public override bool Exists(string key)
@@ -25,20 +31,31 @@ namespace HCommon.Cache
         public override T Get<T>(string key)
         {
             if (_cachemodel != null && Exists(key))
-            {
-                return _cachemodel["key"] as T;
-            }
-            return null;
+                return _cachemodel[key] as T;
+            return default(T);
         }
 
-        public override bool Insert(string key, object data)
+        public override bool Add(string key, object data)
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrEmpty(key) || Exists(key)) return false;
+            _cachemodel.Add(key, data);
+            return Exists(key);
         }
 
         public override bool Remove(string key)
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrEmpty(key)|| !Exists(key)) return false;
+            _cachemodel.Remove(key);
+            return !Exists(key);
+        }
+        public override bool AddOrUpdate(string key, object data)
+        {
+            if (String.IsNullOrEmpty(key)) return false;
+            if (!Exists(key))
+                _cachemodel.Add(key,data);
+            else
+                _cachemodel[key] = data;
+            return Exists(key);
         }
         #endregion
     }

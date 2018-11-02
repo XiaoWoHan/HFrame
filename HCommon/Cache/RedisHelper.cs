@@ -7,22 +7,30 @@ using System.Text;
 
 namespace HCommon.Cache
 {
-    public class RedisHelper : CacheModel
+    public class RedisHelper : CacheModel<RedisHelper>
     {
         #region 属性
         /// <summary>
         /// 连接对象
         /// </summary>
-        public IConnectionMultiplexer Connect => ConnectionMultiplexer.Connect("127.0.0.1:6379");
+        public IConnectionMultiplexer Connect { get; set; }
         /// <summary>
         /// 链接数据
         /// </summary>
-        public IDatabase DataBase => Connect.GetDatabase();
+        public IDatabase DataBase { get; set; }
         #endregion
 
         #region 构造函数
-        public RedisHelper() { }
-        public RedisHelper(string Path) : base(Path) { }
+        public RedisHelper()
+        {
+            Connect = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+            DataBase = Connect.GetDatabase();
+        }
+        public RedisHelper(string Path) : base(Path)
+        {
+            Connect = ConnectionMultiplexer.Connect(Path);
+            DataBase = Connect.GetDatabase();
+        }
         #endregion
 
         #region 方法
@@ -45,7 +53,7 @@ namespace HCommon.Cache
         {
             var value = default(T);///默认返回值
             var cacheValue = DataBase.StringGet(key);
-            if (!cacheValue.IsNull&& cacheValue.HasValue)
+            if (!cacheValue.IsNull && cacheValue.HasValue)
             {
                 value = JsonHelper.ParseJson<T>(cacheValue.ToString());
             }
@@ -56,7 +64,7 @@ namespace HCommon.Cache
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
-        public override bool Insert(string key, object data)
+        public override bool Add(string key, object data)
         {
             lock (_lockeder)
             {
@@ -64,7 +72,7 @@ namespace HCommon.Cache
                 return DataBase.StringSet(key, JsonData);
             }
         }
-        public override bool Insert(string key, object data, int MaxTime)
+        public bool Add(string key, object data, int MaxTime)
         {
             lock (_lockeder)
             {
@@ -73,7 +81,7 @@ namespace HCommon.Cache
                 return DataBase.StringSet(key, jsonData, timeSpan);
             }
         }
-        public override bool Insert(string key, object data, DateTime EndTime)
+        public bool Add(string key, object data, DateTime EndTime)
         {
             lock (_lockeder)
             {
@@ -90,6 +98,7 @@ namespace HCommon.Cache
         {
             lock (_lockeder)
             {
+                if (String.IsNullOrEmpty(key) || !Exists(key)) return false;
                 return DataBase.KeyDelete(key);
             }
         }
@@ -99,6 +108,25 @@ namespace HCommon.Cache
         public override bool Exists(string key)
         {
             return DataBase.KeyExists(key);
+        }
+
+        public override bool AddOrUpdate(string key, object data)
+        {
+            lock (_lockeder)
+            {
+                if (String.IsNullOrEmpty(key)) return false;
+                if (Exists(key))
+                {
+                    return Add(key, data);
+                }
+                else
+                {
+                    Remove(key);
+                    Add(key,data);
+                    return Exists(key);
+                }
+                    
+            }
         }
         #endregion
     }

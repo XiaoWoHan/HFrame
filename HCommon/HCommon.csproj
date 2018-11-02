@@ -84,7 +84,6 @@
     <Compile Include="Helper\TypeHelper.cs" />
     <Compile Include="Helper\ValidateHelper.cs" />
     <Compile Include="Helper\XMLHelper.cs" />
-    <Compile Include="Models\Attr\StringLenthAttribute.cs" />
     <Compile Include="Models\Enum\EnumLoginType.cs" />
     <Compile Include="Models\MemberModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
@@ -92,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Attr\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

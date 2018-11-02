@@ -11,11 +11,21 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            RedisHelper.Insert("KKK", "1234");
-            var aaa = RedisHelper.Get("123");
-            var aaab = RedisHelper.Get("KKK");
+            CacheHelper.Current.Add("123","KKK");
+            var aaa= CacheHelper.Current.Get("123");
             Console.WriteLine(aaa);
-            Console.WriteLine(aaab);
+
+            CacheHelper.Current.Add("1233", "KKK1");
+            var bbb = CacheHelper.Current.Get("1233");
+            Console.WriteLine(bbb);
+
+            RedisHelper.Current.Add("123", "KKK");
+            var aaa1 = RedisHelper.Current.Get("123");
+            Console.WriteLine(aaa1);
+
+            RedisHelper.Current.Add("1233", "KKK1");
+            var bbb1 = RedisHelper.Current.Get("1233");
+            Console.WriteLine(bbb1);
             Console.ReadLine();
         }
     }
