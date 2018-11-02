@@ -32,6 +32,7 @@ namespace HCommon.Model
         }
         #endregion
         #endregion
+
         #region 构造函数
         public ResultModel()
         {

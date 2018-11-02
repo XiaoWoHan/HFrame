@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HCommon.Cache
 {
+    /// <summary>
+    /// 基于HashTable读写缓存
+    /// </summary>
     public class CacheHelper : CacheModel<CacheHelper>
     {
         #region 属性

@@ -7,6 +7,9 @@ using System.Text;
 
 namespace HCommon.Cache
 {
+    /// <summary>
+    /// 基于Redis读写缓存
+    /// </summary>
     public class RedisHelper : CacheModel<RedisHelper>
     {
         #region 属性

@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Cache\CacheHelper.cs" />
     <Compile Include="Cache\CacheModel.cs" />
+    <Compile Include="Helper\EncryptionHelper.cs" />
     <Compile Include="Helper\EventHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\LogHelper.cs" />
@@ -85,8 +86,8 @@
     <Compile Include="Helper\ValidateHelper.cs" />
     <Compile Include="Helper\XMLHelper.cs" />
     <Compile Include="Models\Enum\EnumLoginType.cs" />
-    <Compile Include="Models\MemberModel.cs" />
-    <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Models\Model\MemberModel.cs" />
+    <Compile Include="Models\Model\ResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
