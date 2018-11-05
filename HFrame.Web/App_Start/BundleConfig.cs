@@ -9,17 +9,21 @@ namespace HFrame.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             ///Js
-            bundles.Add(new ScriptBundle("~/Bootstrap").Include(
-                "~/Content/Plugin/bootstrap/js/bootstrap.js"));
-            bundles.Add(new ScriptBundle("~/Jquery").Include(
-                "~/Content/Plugin/Jquery/Jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/Common").Include(
+            
+            //common
+            bundles.Add(new ScriptBundle("~/Js/Common").Include(
+                "~/Content/Plugin/Jquery/jquery-{version}.js",
+                "~/Content/Plugin/popper/popper.js",
+                "~/Content/Plugin/Bootstrap/js/bootstrap.js",
                 "~/Content/common.js"));
+            
             ///Css
-            bundles.Add(new StyleBundle("~/Bootstrap").Include(
+            
+            //Common
+            bundles.Add(new StyleBundle("~/Css/Common").Include(
             "~/Content/Plugin/bootstrap/css/bootstrap.css"));
-            //BundleTable.EnableOptimizations = true;
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

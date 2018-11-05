@@ -18,6 +18,11 @@ namespace HFrame.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Default", action = "Login", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "js",
+                url: "Content/Plugin/layui/{file}"
+            );
         }
     }
 }
