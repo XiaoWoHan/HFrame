@@ -147,17 +147,26 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\Default\DefaultController.cs" />
+    <Compile Include="Controllers\Default\Model\RegisterModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\Default\Service\DefaultService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\DataBase\HFrameDb.ldf">
+      <DependentUpon>HFrameDb.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\DataBase\HFrameDb.mdf" />
+    <Content Include="Content\common.js" />
     <Content Include="Content\Plugin\bootstrap\css\bootstrap.css" />
     <Content Include="Content\Plugin\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\Plugin\bootstrap\js\bootstrap.js" />
     <Content Include="Content\Plugin\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Plugin\Jquery\jquery-3.3.1.js" />
+    <Content Include="Content\Plugin\Jquery\jquery-3.3.1.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -176,13 +185,18 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\Default\Login.cshtml" />
     <Content Include="Views\Default\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HFrame.Common\HFrame.Common.csproj">
+      <Project>{c025578c-464e-46e3-a0b7-fd3c85a8e77c}</Project>
+      <Name>HFrame.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
