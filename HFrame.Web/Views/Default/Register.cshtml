@@ -48,3 +48,10 @@
     </div>
 </body>
 </html>
+<script>
+    common.interceptform(function (r) {
+        if (r.ErrorCode == 0) {
+            location.href = "@Url.Action("Login")";
+        }
+    });
+</script>

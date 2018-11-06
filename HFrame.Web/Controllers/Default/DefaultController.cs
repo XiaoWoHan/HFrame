@@ -40,6 +40,7 @@ namespace HFrame.Web.Controllers
                     return Json(result);
                 }
             }
+            result.ErrorCode = -1;
             result.ErrorMsg = $"注册失败 {results.FirstOrDefault()?.ErrorMessage}";
             return Json(result);
         }
