@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HFrame.DAL
 {
-    public class DbBase<T>
+    public class DbBase<T> where T : class, new()
     {
         #region 属性
         private static IDbConnection connection = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=HFrameDB;Integrated Security=True;MultipleActiveResultSets=True");
@@ -22,9 +22,10 @@ namespace HFrame.DAL
             var SelectStr = DBSqlHelper<T>.GetTableSelectSql();
             return connection.Query<T>(SelectStr).FirstOrDefault();
         }
-        public void Add()
+        public bool Add()
         {
-            
+            var InsertStr = DBSqlHelper<T>.GetTableInsertSql();
+            return connection.Execute(InsertStr)>0;
         }
     }
 }

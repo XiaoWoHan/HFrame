@@ -13,7 +13,17 @@ namespace HFrame.Web.Default.Service
     {
         public static bool Register(RegisterModel Model)
         {
-            var AAA=Data_User.Get();
+            Data_User U = new Data_User
+            {
+                Name = "张三",
+                Password = "123",
+                UserName = "123",
+                Telephone = "123",
+                CreateTime = DateTime.Now,
+                IsLocked = false,
+                IsDeleted = false
+            };
+            U.Add();
             return RedisHelper.Current.Add("Member",Model);
         }
     }
