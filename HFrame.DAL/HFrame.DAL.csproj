@@ -44,10 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data_User.cs" />
+    <Compile Include="DbBase.cs" />
+    <Compile Include="DBSqlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HFrame.DB\HFrame.DB.sqlproj">
+      <Project>{981be0d3-69ed-4356-b854-5951a1094518}</Project>
+      <Name>HFrame.DB</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
