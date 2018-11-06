@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\LogHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -99,6 +100,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HFrame.Common\HFrame.Common.csproj">
+      <Project>{c025578c-464e-46e3-a0b7-fd3c85a8e77c}</Project>
+      <Name>HFrame.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HFrame.Web\HFrame.Web.csproj">
       <Project>{43E733B1-7E18-4C8B-8C80-E157D6AE559A}</Project>
       <Name>HFrame.Web</Name>

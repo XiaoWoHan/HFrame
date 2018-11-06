@@ -9,23 +9,13 @@
 <head>
     <meta charset="utf-8" />
     <title>注册</title>
-    <style>
-        .center {
-            margin-top: 25%;
-        }
-
-        @@media screen and (min-width:960px) {
-            .center {
-                margin-left: 25%;
-            }
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
+<body class="background">
+    <div>
         <div class="row">
-            @using (Html.BeginForm("Register","Default",FormMethod.Post,new { @class = "col-md-6 center" }))
+            @using (Html.BeginForm("Register","Default",FormMethod.Post,new { @class = "col-md-6 center loginbord" }))
             {
+                <h2 class="loginText">注册</h2>
                 <div class="form-group">
                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "请输入用户名" })
                 </div>

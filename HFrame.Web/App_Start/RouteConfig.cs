@@ -20,8 +20,8 @@ namespace HFrame.Web
             );
 
             routes.MapRoute(
-                name: "js",
-                url: "Content/Plugin/layui/{file}"
+                name: "Image",
+                url: "Content/Image/{filename}"
             );
         }
     }

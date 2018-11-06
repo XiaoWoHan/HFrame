@@ -9,7 +9,7 @@ common = {
     },
     ready: function () {
         common.importJs('/Content/Plugin/layer/layer.js');//默认引入Layer
-        common.importJs('/Content/Plugin/HFrameJs/module/Http.js');//默认引入Layer
+        common.importJs('/Content/Plugin/HFrame/js/module/Http.js');//默认引入Http模块
         common.interceptform();//默认拦截表单
     },
     interceptform: function (callback) {//拦截表单

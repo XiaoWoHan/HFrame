@@ -15,12 +15,13 @@ namespace HFrame.Web
                 "~/Content/Plugin/Jquery/jquery-{version}.js",
                 "~/Content/Plugin/popper/popper.js",
                 "~/Content/Plugin/Bootstrap/js/bootstrap.js",
-                "~/Content/Plugin/HFrameJs/common.js"));
+                "~/Content/Plugin/HFrame/js/common.js"));
             
             ///Css
             
             //Common
             bundles.Add(new StyleBundle("~/Css/Common").Include(
+            "~/Content/Plugin/HFrame/css/public.css",
             "~/Content/Plugin/bootstrap/css/bootstrap.css"));
 
             BundleTable.EnableOptimizations = true;
