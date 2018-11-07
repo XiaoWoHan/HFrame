@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HFrame.Common.Cache;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +33,7 @@ namespace HFrame.Web.Default.Model
         /// 联系电话
         /// </summary>
         [Required(ErrorMessage = "请输入联系电话")]
-        [Phone]
+        [Phone(ErrorMessage ="联系电话不正确")]
         public string Telephone { get; set; }
         /// <summary>
         /// 验证码

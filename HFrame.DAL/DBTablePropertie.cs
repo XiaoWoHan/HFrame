@@ -40,6 +40,7 @@ namespace HFrame.DAL
 
         #endregion
 
+        #region 内部方法
         /// <summary>
         /// 根据属性名称获取属性值
         /// </summary>
@@ -52,7 +53,7 @@ namespace HFrame.DAL
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public object FormatValue(object value)
+        private object FormatValue(object value)
         {
             if (value == null)
             {
@@ -92,7 +93,7 @@ namespace HFrame.DAL
                 }
             }
         }
-        public string ToSqlFilter(string value)
+        private string ToSqlFilter(string value)
         {
             if (!String.IsNullOrEmpty(value))
             {
@@ -100,5 +101,7 @@ namespace HFrame.DAL
             }
             return value;
         }
+
+        #endregion
     }
 }

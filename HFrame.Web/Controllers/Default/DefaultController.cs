@@ -1,4 +1,6 @@
-﻿using HFrame.Common.Model;
+﻿using HFrame.Common.Cache;
+using HFrame.Common.Helper;
+using HFrame.Common.Model;
 using HFrame.Web.Default.Model;
 using HFrame.Web.Default.Service;
 using System;
@@ -12,18 +14,29 @@ namespace HFrame.Web.Controllers
 {
     public class DefaultController : Controller
     {
-        public ActionResult Login()
+        #region 公共方法
+        /// <summary>
+        /// 获取验证码图片
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ValidateCodeImg()
         {
-            return View();
+            var Code = ValidateCodeHelper.GetRandomCode(7);
+            CacheHelper.Current.Add("SecurityCode",Code); //验证码存放在TempData中
+            return File(ValidateCodeHelper.GetVerifyCodeImg(Code), "image/Jpeg");
         }
-        //public ActionResult Login(RegisterModel Model)
-        //{
-        //}
+        #endregion
+
         [HttpGet]
-        public ActionResult Register()
+        public ActionResult Login() => View();
+        public ActionResult Login(LoginModel Model)
         {
-            return View();
+            var result = new ResultModel();
+            var Status = DefaultService.Login(result, Model);
+            return Json(result);
         }
+        [HttpGet]
+        public ActionResult Register() => View();
         [HttpPost]
         public ActionResult Register(RegisterModel Model)
         {

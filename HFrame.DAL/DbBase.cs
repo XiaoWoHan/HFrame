@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,15 +22,32 @@ namespace HFrame.DAL
         #endregion
 
         #region 方法
+        #region 查询
         /// <summary>
         /// 获取
         /// </summary>
         /// <returns></returns>
-        public T Get()
+        public T GetFirst()
         {
             var SelectStr = GetTableSelectSql();
             return connection.Query<T>(SelectStr).FirstOrDefault();
         }
+        public T GetFirst(Expression<Func<T,bool>> expression)
+        {
+            var SelectStr = GetTableWhereSelectSql(expression);
+            return connection.Query<T>(SelectStr).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 获取所有
+        /// </summary>
+        /// <returns></returns>
+        public List<T> GetList()
+        {
+            var SelectStr = GetTableSelectSql();
+            return connection.Query<T>(SelectStr).ToList();
+        }
+        #endregion
         /// <summary>
         /// 添加
         /// </summary>
