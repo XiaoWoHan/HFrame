@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     common.ready();
 })
 
@@ -14,6 +14,7 @@ common = {
     },
     interceptform: function (callback) {//拦截表单
         $(":submit").click(function (check) {
+            check.preventDefault();//此处阻止提交表单
             var d = $('form').serializeArray();
             var u = $('form').attr("action");
             var m = $('form').attr("method");
@@ -24,7 +25,6 @@ common = {
                     }
                 });
             });
-            check.preventDefault();//此处阻止提交表单
         });
     },
     importJs: function importJs(url) {//封装引入JS

@@ -7,36 +7,9 @@ using System.Threading.Tasks;
 
 namespace HFrame.DAL
 {
-    internal class DBSqlHelper<T> where T : class, new()
+    public class DBSqlHelper<T>: DBTablePropertie<T> where T : class, new()
     {
         #region 属性
-        #region 实体类属性
-        /// <summary>
-        /// 实体类名称（表名称）
-        /// </summary>
-        private readonly static string TableName = typeof(T).Name;
-        /// <summary>
-        /// 实体类所有公共属性
-        /// </summary>
-        private readonly static PropertyInfo[] PropInfo = typeof(T).GetProperties();
-        /// <summary>
-        /// 字段名集合
-        /// </summary>
-        private readonly static List<string> ColumnsList = PropInfo.Select(m => m.Name).ToList();
-        /// <summary>
-        /// 所有字段名（以【,】分割）
-        /// </summary>
-        private readonly static string Columns = String.Join(",   ", ColumnsList);
-        /// <summary>
-        /// 实体类所有公共属性
-        /// </summary>
-        private readonly static List<string> ColumnsValueList = PropInfo.Select(m => m.GetValue(typeof(T)).ToString()).ToList();
-        /// <summary>
-        /// 所有字段名（以【,】分割）
-        /// </summary>
-        private readonly static string Values = String.Join(",   ", ColumnsValueList);
-        #endregion
-
         #region SQL字段封装
         private const string SELECT = " SELECT  ";
         private const string FROM = "   FROM    ";
@@ -53,7 +26,7 @@ namespace HFrame.DAL
         /// 查询所有
         /// </summary>
         /// <returns></returns>
-        public static string GetTableSelectSql()
+        public string GetTableSelectSql()
         {
             StringBuilder SelectSql = new StringBuilder();
             SelectSql.Append(SELECT);
@@ -66,7 +39,7 @@ namespace HFrame.DAL
         /// 插入数据
         /// </summary>
         /// <returns></returns>
-        public static string GetTableInsertSql()
+        public string GetTableInsertSql()
         {
             StringBuilder InsertSql = new StringBuilder();
             InsertSql.Append(INSERT);

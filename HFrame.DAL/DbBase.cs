@@ -9,23 +9,44 @@ using System.Threading.Tasks;
 
 namespace HFrame.DAL
 {
-    public class DbBase<T> where T : class, new()
+    public class DbBase<T>:DBSqlHelper<T> where T : class, new()
     {
         #region 属性
         private static IDbConnection connection = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=HFrameDB;Integrated Security=True;MultipleActiveResultSets=True");
+        public static DbBase<T> Current => new DbBase<T>();
         #endregion
 
         #region 构造函数
+
         #endregion
-        public static T Get()
+
+        #region 方法
+        /// <summary>
+        /// 获取
+        /// </summary>
+        /// <returns></returns>
+        public T Get()
         {
-            var SelectStr = DBSqlHelper<T>.GetTableSelectSql();
+            var SelectStr = GetTableSelectSql();
             return connection.Query<T>(SelectStr).FirstOrDefault();
         }
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <returns></returns>
         public bool Add()
         {
-            var InsertStr = DBSqlHelper<T>.GetTableInsertSql();
+            var InsertStr = GetTableInsertSql();
             return connection.Execute(InsertStr)>0;
         }
+        public bool Update()
+        {
+            return false;
+        }
+        public bool Deleted()
+        {
+            return false;
+        }
+        #endregion
     }
 }

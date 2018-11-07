@@ -28,20 +28,7 @@ namespace HFrame.Web.Controllers
         public ActionResult Register(RegisterModel Model)
         {
             var result = new ResultModel();
-            ValidationContext context = new ValidationContext(Model, null, null);
-            List<ValidationResult> results = new List<ValidationResult>();
-            var valid=Validator.TryValidateObject(Model, context, results, true);
-            if (valid)
-            {
-                var Status = DefaultService.Register(Model);
-                if (Status)
-                {
-                    result.ErrorMsg = "注册成功";
-                    return Json(result);
-                }
-            }
-            result.ErrorCode = -1;
-            result.ErrorMsg = $"注册失败 {results.FirstOrDefault()?.ErrorMessage}";
+            var Status = DefaultService.Register(result, Model);
             return Json(result);
         }
     }

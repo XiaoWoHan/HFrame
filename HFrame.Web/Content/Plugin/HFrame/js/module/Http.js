@@ -1,6 +1,3 @@
-﻿
-
-
 common.Http = {
     ///内部参数
     _Data: {

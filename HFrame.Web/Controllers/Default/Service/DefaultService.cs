@@ -4,6 +4,7 @@ using HFrame.DAL;
 using HFrame.Web.Default.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,20 +12,23 @@ namespace HFrame.Web.Default.Service
 {
     public class DefaultService
     {
-        public static bool Register(RegisterModel Model)
+        public static bool Register(ResultModel result, RegisterModel Model)
         {
-            Data_User U = new Data_User
+            #region 模型表单验证
+            ValidationContext context = new ValidationContext(Model, null, null);
+            List<ValidationResult> results = new List<ValidationResult>();
+            var valid = Validator.TryValidateObject(Model, context, results, true);
+            #endregion
+            if (valid)
             {
-                Name = "张三",
-                Password = "123",
-                UserName = "123",
-                Telephone = "123",
-                CreateTime = DateTime.Now,
-                IsLocked = false,
-                IsDeleted = false
-            };
-            U.Add();
-            return RedisHelper.Current.Add("Member",Model);
+                return RedisHelper.Current.Add("Member", Model);
+            }
+            else
+            {
+                result.ErrorCode = -1;
+                result.ErrorMsg = $"注册失败 {results.FirstOrDefault()?.ErrorMessage}";
+                return false;
+            }
         }
     }
 }
