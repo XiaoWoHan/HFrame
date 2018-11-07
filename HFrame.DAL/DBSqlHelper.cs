@@ -18,10 +18,14 @@ namespace HFrame.DAL
         #endregion
         #endregion
 
+        #region 构造函数
         public DBSqlHelper()
         {
 
         }
+        #endregion
+
+        #region 查询操作
         /// <summary>
         /// 查询所有
         /// </summary>
@@ -30,24 +34,32 @@ namespace HFrame.DAL
         {
             StringBuilder SelectSql = new StringBuilder();
             SelectSql.Append(SELECT);
-            SelectSql.Append(Columns);
+            SelectSql.Append(base.Columns);
             SelectSql.Append(FROM);
-            SelectSql.Append(TableName);
+            SelectSql.Append(base.TableName);
             return SelectSql.ToString();
         }
+        #endregion
+
+        #region 插入操作
+        private static object _InsertSqlLocker = new object();
         /// <summary>
         /// 插入数据
         /// </summary>
         /// <returns></returns>
         public string GetTableInsertSql()
         {
-            StringBuilder InsertSql = new StringBuilder();
-            InsertSql.Append(INSERT);
-            InsertSql.Append(TableName);
-            InsertSql.Append($" (   {Columns}  )    ");
-            InsertSql.Append(VALUES);
-            InsertSql.Append($" (   {Values}    )   ");
-            return InsertSql.ToString();
+            lock (_InsertSqlLocker)
+            {
+                StringBuilder InsertSql = new StringBuilder();
+                InsertSql.Append(INSERT);
+                InsertSql.Append(base.TableName);
+                InsertSql.Append($" (   {base.Columns}  )    ");
+                InsertSql.Append(VALUES);
+                InsertSql.Append($" (   {base.Values}    )   ");
+                return InsertSql.ToString();
+            }
         }
+        #endregion
     }
 }

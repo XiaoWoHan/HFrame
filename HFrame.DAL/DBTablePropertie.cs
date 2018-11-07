@@ -31,63 +31,11 @@ namespace HFrame.DAL
         /// <summary>
         /// 实体类所有公共属性
         /// </summary>
-        protected internal List<object> ColumnsValueList => ColumnsList.Select(m=> GetPropertyValue(m)).ToList();
+        protected internal List<object> ValueList => ColumnsList.Select(m=> GetPropertyValue(m)).ToList();
         /// <summary>
         /// 所有字段名（以【,】分割）
         /// </summary>
-        protected internal string Values
-        {
-            get
-            {
-                List<String> ValueStr = new List<String>();
-
-                foreach (var item in ColumnsValueList)
-                {
-                    if(item is String)
-                    {
-                        ValueStr.Add($"   '{item}' ");
-                        continue;
-                    }
-                    if(item is Int32)
-                    {
-                        ValueStr.Add($"    {item}   ");
-                        continue;
-                    }
-                    if (item is DateTime)
-                    {
-                        ValueStr.Add($"    '{item}'   ");
-                        continue;
-                    }
-                    if (item is Single)
-                    {
-                        ValueStr.Add($"    {item}   ");
-                        continue;
-                    }
-                    if (item is Double)
-                    {
-                        ValueStr.Add($"    {item}   ");
-                        continue;
-                    }
-                    if (item is Decimal)
-                    {
-                        ValueStr.Add($"    {item}   ");
-                        continue;
-                    }
-                    if (item is Decimal)
-                    {
-                        ValueStr.Add($"    {item}   ");
-                        continue;
-                    }
-                    if (item is Boolean)
-                    {
-                        ValueStr.Add($"    {(Convert.ToBoolean(item) ? 1 : 0)}   ");
-                        continue;
-                    }
-                    ValueStr.Add($"    {item}   ");
-                }
-                return String.Join("    ,   ",ValueStr);
-            }
-        }
+        protected internal string Values => String.Join(" ,", ValueList.Select(m => FormatValue(m)));
         #endregion
 
         #endregion
@@ -99,5 +47,58 @@ namespace HFrame.DAL
         /// <param name="propertyName">属性名称</param>
         /// <returns></returns>
         private object GetPropertyValue(string propertyName)=> typeof(T).GetProperty(propertyName).GetValue(this);
+        /// <summary>
+        /// 获取当前字段插入语句格式
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public object FormatValue(object value)
+        {
+            if (value == null)
+            {
+                return "NULL";
+            }
+            else
+            {
+                if (value is DateTime)
+                {
+                    var date = Convert.ToDateTime(value);
+                    if (date < Convert.ToDateTime("1900-1-1"))
+                    {
+                        date = Convert.ToDateTime("1900-1-1");
+                    }
+                    return "('" + date.ToString("yyyy-MM-dd HH:mm:ss") + "') ";
+                }
+                else if (value is Enum)
+                {
+                    return Convert.ToInt64(value);
+                }
+                else if (value is byte[])
+                {
+                    string bytesString = "0x" + BitConverter.ToString((byte[])value).Replace("-", "");
+                    return bytesString;
+                }
+                else if (value is Boolean)
+                {
+                    return Convert.ToBoolean(value) ? "1" : "0";
+                }
+                else if (value is String || value is object)
+                {
+                    return "N'" + ToSqlFilter(value.ToString()) + "'";
+                }
+                else
+                {
+                    return value;
+                }
+            }
+        }
+        public string ToSqlFilter(string value)
+        {
+            if (!String.IsNullOrEmpty(value))
+            {
+                value = value.Replace("'", "''");
+            }
+            return value;
+        }
     }
 }
