@@ -12,6 +12,10 @@ namespace HFrame.Common.Helper
 {
     public class ValidateCodeHelper
     {
+        #region 属性
+        public static string CurrentCodeString => Cache.CacheHelper.Current.Get("LoginValidateCode")?.ToString()?.ToLower();
+        #endregion
+
         #region 字符验证公共方法
         /// <summary>
         /// 生成随机的字符串

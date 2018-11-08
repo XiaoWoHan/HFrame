@@ -16,39 +16,36 @@ namespace HFrame.Web.Default.Service
     {
         public static bool Register(ResultModel result, RegisterModel Model)
         {
-            if(CacheHelper.Current.Get("SecurityCode").ToString().ToLower()!= Model.VerisonCode.ToLower())
+            ValidationContext context = new ValidationContext(Model, null, null);
+            List<ValidationResult> results = new List<ValidationResult>();
+            var valid = Validator.TryValidateObject(Model, context, results, true);
+            if (!valid)
+            {
+                result.ErrorCode = -1;
+                result.ErrorMsg = $"注册失败 {results.FirstOrDefault()?.ErrorMessage}";
+                return false;
+            }
+            if (ValidateCodeHelper.CurrentCodeString != Model.VerisonCode.ToLower())
             {
                 result.ErrorCode = -1;
                 result.ErrorMsg = $"注册失败 验证码错误";
                 return false;
             }
             #region 模型表单验证
-            ValidationContext context = new ValidationContext(Model, null, null);
-            List<ValidationResult> results = new List<ValidationResult>();
-            var valid = Validator.TryValidateObject(Model, context, results, true);
             #endregion
-            if (valid)
+            var UserOID = Guid.NewGuid().ToString();
+            var UserModel = new Data_User()
             {
-                var UserOID = Guid.NewGuid().ToString();
-                var UserModel = new Data_User()
-                {
-                    OID = UserOID,
-                    Name = Model.UserName,
-                    UserName = Model.UserName,
-                    Password = EncryptionHelper.HMACSMD5Encrypt(Model.Password, UserOID, Encoding.ASCII),
-                    Telephone = Model.Telephone,
-                    IsDeleted = false,
-                    IsLocked = false,
-                    CreateTime = DateTime.Now
-                };
-                return UserModel.Add();
-            }
-            else
-            {
-                result.ErrorCode = -1;
-                result.ErrorMsg = $"注册失败 {results.FirstOrDefault()?.ErrorMessage}";
-                return false;
-            }
+                OID = UserOID,
+                Name = Model.UserName,
+                UserName = Model.UserName,
+                Password = EncryptionHelper.HMACSMD5Encrypt(Model.Password, UserOID, Encoding.ASCII),
+                Telephone = Model.Telephone,
+                IsDeleted = false,
+                IsLocked = false,
+                CreateTime = DateTime.Now
+            };
+            return UserModel.Add();
         }
         public static bool Login(ResultModel result, LoginModel Model)
         {

@@ -34,6 +34,7 @@ namespace HFrame.Common.Cache
         #endregion
 
         #region 方法
+        #region 获取
         /// <summary>
         /// 获取对象
         /// </summary>
@@ -59,6 +60,9 @@ namespace HFrame.Common.Cache
             }
             return value;
         }
+        #endregion
+
+        #region 添加
         /// <summary>
         /// 插入对象
         /// </summary>
@@ -90,6 +94,9 @@ namespace HFrame.Common.Cache
                 return DataBase.StringSet(key, jsonData, timeSpan);
             }
         }
+        #endregion
+
+        #region 删除
         /// <summary>
         /// 删除对象
         /// </summary>
@@ -102,6 +109,9 @@ namespace HFrame.Common.Cache
                 return DataBase.KeyDelete(key);
             }
         }
+        #endregion
+
+        #region 判断
         /// <summary>
         /// 判断key是否存在
         /// </summary>
@@ -109,7 +119,9 @@ namespace HFrame.Common.Cache
         {
             return DataBase.KeyExists(key);
         }
+        #endregion
 
+        #region 添加或更新
         public override bool AddOrUpdate(string key, object data)
         {
             lock (_lockeder)
@@ -128,6 +140,7 @@ namespace HFrame.Common.Cache
                     
             }
         }
+        #endregion
         #endregion
     }
 }
