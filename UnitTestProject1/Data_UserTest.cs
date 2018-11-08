@@ -26,10 +26,5 @@ namespace UnitTestProject1
                 Assert.IsTrue(User.Add());
             }
         }
-        [TestMethod]
-        public void TestGet()
-        {
-            Assert.IsNotNull(Data_User.Current.Get());
-        }
     }
 }
