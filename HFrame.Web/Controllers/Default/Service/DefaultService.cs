@@ -59,7 +59,7 @@ namespace HFrame.Web.Default.Service
             #endregion
             if (valid)
             {
-                var User = Data_User.Current.GetFirst(m=>m.UserName.Equals(Model.UserName));
+                var User = Data_User.Current.GetFirst(m => m.UserName == Model.UserName);
                 var EncryptPass = EncryptionHelper.HMACSMD5Encrypt(Model.Password, User.OID, Encoding.ASCII);
                 if (EncryptPass == User.Password)
                 {

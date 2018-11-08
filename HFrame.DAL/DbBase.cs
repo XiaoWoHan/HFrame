@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace HFrame.DAL
 {
+    /// <summary>
+    /// 实体类基类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DbBase<T>:DBSqlHelper<T> where T : class, new()
     {
         #region 属性

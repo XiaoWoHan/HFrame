@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace HFrame.DAL
 {
+    /// <summary>
+    /// SQL语句帮助类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DBSqlHelper<T>: DBTablePropertie<T> where T : class, new()
     {
         #region 属性
@@ -91,7 +95,7 @@ namespace HFrame.DAL
         {
             lock (_WhereSqlLocker)
             {
-                return String.Empty;
+                return DealExpress(expression);
             }
         }
         public static string DealExpress(Expression exp)

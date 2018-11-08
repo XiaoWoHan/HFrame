@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace HFrame.DAL
 {
+    /// <summary>
+    /// 当前类属性
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DBTablePropertie<T> where T : class, new()
     {
         #region 属性
