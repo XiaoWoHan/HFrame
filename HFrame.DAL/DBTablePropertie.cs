@@ -61,7 +61,7 @@ namespace HFrame.DAL
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private object FormatValue(object value)
+        protected internal object FormatValue(object value)
         {
             if (value == null)
             {

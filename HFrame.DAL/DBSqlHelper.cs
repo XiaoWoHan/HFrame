@@ -133,8 +133,9 @@ namespace HFrame.DAL
         {
             lock (_WhereSqlLocker)
             {
-                var Str=LambdaToSqlHelper.GetWhereSql(expression,new List<ParMODEL>());
-                return String.Empty;
+                var itemLambda = new LambdaToSql.LambdaRouter();
+                var Str= itemLambda.ExpressionRouter(expression);
+                return Str;
             }
         }
         #endregion

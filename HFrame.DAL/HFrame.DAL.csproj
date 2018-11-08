@@ -55,7 +55,13 @@
     <Compile Include="DbBase.cs" />
     <Compile Include="DBSqlHelper.cs" />
     <Compile Include="DBTablePropertie.cs" />
-    <Compile Include="LambdaHelper.cs" />
+    <Compile Include="LambdaHelper\EntityModel\DataParameter.cs" />
+    <Compile Include="LambdaHelper\ExpressionTypeCast.cs" />
+    <Compile Include="LambdaHelper\LambdaRouter.cs" />
+    <Compile Include="LambdaHelper\MsSqlHandle.cs" />
+    <Compile Include="LambdaHelper\Nominator.cs" />
+    <Compile Include="LambdaHelper\ParserBuilder.cs" />
+    <Compile Include="LambdaHelper\PartialEvaluator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

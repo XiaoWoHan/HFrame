@@ -13,7 +13,7 @@ namespace HFrame.DAL.Test
         [TestMethod]
         public void TestDelete()
         {
-            Assert.IsTrue(new Data_User().Update());
+            Assert.IsNull(Data_User.Current.GetFirst(m=>m.Name=="11"||m.OID.Equals("3asd4352fadsf")&&m.IsDeleted!=false&&m.IsLocked==true&&true));
         }
     }
 }
