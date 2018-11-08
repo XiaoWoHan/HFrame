@@ -15,6 +15,7 @@ namespace HFrame.DAL
     public class DBSqlHelper<T>: DBTablePropertie<T> where T : class, new()
     {
         #region 属性
+
         #region SQL字段封装
         private const string SELECT = " SELECT  ";
         private const string FROM = "   FROM    ";
@@ -22,7 +23,13 @@ namespace HFrame.DAL
 
         private const string INSERT = "   INSERT    INTO    ";
         private const string VALUES = "   VALUES    ";
+
+        private const string DELETE = "   DELETE    ";
+
+        private const string UPDATE = "   UPDATE    ";
+        private const string SET = "   SET    ";
         #endregion
+
         #endregion
 
         #region 构造函数
@@ -38,7 +45,7 @@ namespace HFrame.DAL
         /// 查询所有
         /// </summary>
         /// <returns></returns>
-        public string GetTableSelectSql()
+        protected internal string GetTableSelectSql()
         {
             lock (_selectLocker)
             {
@@ -52,7 +59,7 @@ namespace HFrame.DAL
         }
 
         private static object _whereSelectLocker = new object();
-        public string GetTableWhereSelectSql(Expression<Func<T, bool>> expression)
+        protected internal string GetTableWhereSelectSql(Expression<Func<T, bool>> expression)
         {
             lock (_whereSelectLocker)
             {
@@ -74,7 +81,7 @@ namespace HFrame.DAL
         /// 插入数据
         /// </summary>
         /// <returns></returns>
-        public string GetTableInsertSql()
+        protected internal string GetTableInsertSql()
         {
             lock (_InsertSqlLocker)
             {
@@ -89,111 +96,46 @@ namespace HFrame.DAL
         }
         #endregion
 
+        #region 删除操作
+        private static object _DeleteSqlLocker = new object();
+        protected internal string GetTableDeleteSql()
+        {
+            lock (_DeleteSqlLocker)
+            {
+                var DeleteSqlBu = new StringBuilder();
+                DeleteSqlBu.Append(DELETE);
+                DeleteSqlBu.Append(FROM);
+                DeleteSqlBu.Append(TableName);
+                return DeleteSqlBu.ToString();
+            }
+        }
+        #endregion
+
+        #region 更新操作
+        private static object _UpdateSqlLocker = new object();
+        protected internal string GetTableUpDateSql()
+        {
+            lock (_UpdateSqlLocker)
+            {
+                var UpdateSqlBu = new StringBuilder();
+                UpdateSqlBu.Append(UPDATE);
+                UpdateSqlBu.Append(TableName);
+                UpdateSqlBu.Append(SET);
+                UpdateSqlBu.Append(ColumsAndValue);
+                return UpdateSqlBu.ToString();
+            }
+        }
+        #endregion
+
         #region 查询条件
         private static object _WhereSqlLocker = new object();
-        public string GetTableWhereSql(Expression<Func<T, bool>> expression)
+        protected internal string GetTableWhereSql(Expression<Func<T, bool>> expression)
         {
             lock (_WhereSqlLocker)
             {
-                return DealExpress(expression);
+                var Str=LambdaToSqlHelper.GetWhereSql(expression,new List<ParMODEL>());
+                return String.Empty;
             }
-        }
-        public static string DealExpress(Expression exp)
-        {
-            if (exp is LambdaExpression)
-            {
-                LambdaExpression l_exp = exp as LambdaExpression;
-                return DealExpress(l_exp.Body);
-            }
-            if (exp is BinaryExpression)
-            {
-                return DealBinaryExpression(exp as BinaryExpression);
-            }
-            if (exp is MemberExpression)
-            {
-                return DealMemberExpression(exp as MemberExpression);
-            }
-            if (exp is ConstantExpression)
-            {
-                return DealConstantExpression(exp as ConstantExpression);
-            }
-            if (exp is UnaryExpression)
-            {
-                return DealUnaryExpression(exp as UnaryExpression);
-            }
-            return "";
-        }
-        public static string DealUnaryExpression(UnaryExpression exp)
-        {
-            return DealExpress(exp.Operand);
-        }
-        public static string DealConstantExpression(ConstantExpression exp)
-        {
-            object vaule = exp.Value;
-            string v_str = string.Empty;
-            if (vaule == null)
-            {
-                return "NULL";
-            }
-            if (vaule is string)
-            {
-                v_str = string.Format("'{0}'", vaule.ToString());
-            }
-            else if (vaule is DateTime)
-            {
-                DateTime time = (DateTime)vaule;
-                v_str = string.Format("'{0}'", time.ToString("yyyy-MM-dd HH:mm:ss"));
-            }
-            else
-            {
-                v_str = vaule.ToString();
-            }
-            return v_str;
-        }
-        public static string DealBinaryExpression(BinaryExpression exp)
-        {
-
-            string left = DealExpress(exp.Left);
-            string oper = GetOperStr(exp.NodeType);
-            string right = DealExpress(exp.Right);
-            if (right == "NULL")
-            {
-                if (oper == "=")
-                {
-                    oper = " is ";
-                }
-                else
-                {
-                    oper = " is not ";
-                }
-            }
-            return left + oper + right;
-        }
-        public static string DealMemberExpression(MemberExpression exp)
-        {
-            return exp.Member.Name;
-        }
-        public static string GetOperStr(ExpressionType e_type)
-        {
-            switch (e_type)
-            {
-                case ExpressionType.OrElse: return " OR ";
-                case ExpressionType.Or: return "|";
-                case ExpressionType.AndAlso: return " AND ";
-                case ExpressionType.And: return "&";
-                case ExpressionType.GreaterThan: return ">";
-                case ExpressionType.GreaterThanOrEqual: return ">=";
-                case ExpressionType.LessThan: return "<";
-                case ExpressionType.LessThanOrEqual: return "<=";
-                case ExpressionType.NotEqual: return "<>";
-                case ExpressionType.Add: return "+";
-                case ExpressionType.Subtract: return "-";
-                case ExpressionType.Multiply: return "*";
-                case ExpressionType.Divide: return "/";
-                case ExpressionType.Modulo: return "%";
-                case ExpressionType.Equal: return "=";
-            }
-            return "";
         }
         #endregion
     }

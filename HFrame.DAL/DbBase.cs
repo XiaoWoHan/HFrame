@@ -52,6 +52,8 @@ namespace HFrame.DAL
             return connection.Query<T>(SelectStr).ToList();
         }
         #endregion
+
+        #region 添加
         /// <summary>
         /// 添加
         /// </summary>
@@ -61,14 +63,23 @@ namespace HFrame.DAL
             var InsertStr = GetTableInsertSql();
             return connection.Execute(InsertStr)>0;
         }
+        #endregion
+
+        #region 更新
         public bool Update()
         {
-            return false;
+            var InsertStr = GetTableUpDateSql();
+            return connection.Execute(InsertStr) > 0;
         }
+        #endregion
+
+        #region 删除
         public bool Deleted()
         {
-            return false;
+            var InsertStr = GetTableDeleteSql();
+            return connection.Execute(InsertStr) > 0;
         }
+        #endregion
         #endregion
     }
 }

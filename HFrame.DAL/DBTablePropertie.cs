@@ -40,6 +40,7 @@ namespace HFrame.DAL
         /// 所有字段名（以【,】分割）
         /// </summary>
         protected internal string Values => String.Join(" ,", ValueList.Select(m => FormatValue(m)));
+        protected internal string ColumsAndValue => String.Join("   ,", PropInfo.Select(m => $"   {m.Name}={FormatValue(m.GetValue(this))}"));
         #endregion
 
         #endregion
@@ -97,6 +98,11 @@ namespace HFrame.DAL
                 }
             }
         }
+        /// <summary>
+        /// 转义字符，以防报错
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private string ToSqlFilter(string value)
         {
             if (!String.IsNullOrEmpty(value))

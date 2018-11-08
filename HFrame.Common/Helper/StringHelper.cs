@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -71,5 +72,10 @@ namespace HFrame.Common.Helper
         }
 
         #endregion
+
+        public static bool IsContainsIn(this string thisValue, params string[] inValues)
+        {
+            return inValues.Any(it => thisValue.Contains(it));
+        }
     }
 }
