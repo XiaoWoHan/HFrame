@@ -40,6 +40,9 @@ namespace HFrame.DAL
         /// 所有字段名（以【,】分割）
         /// </summary>
         protected internal string Values => String.Join(" ,", ValueList.Select(m => FormatValue(m)));
+        /// <summary>
+        /// 更新等号连接字段名和值
+        /// </summary>
         protected internal string ColumsAndValue => String.Join("   ,", PropInfo.Select(m => $"   {m.Name}={FormatValue(m.GetValue(this))}"));
         #endregion
 

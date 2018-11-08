@@ -13,9 +13,7 @@ namespace HFrame.DAL.Test
         [TestMethod]
         public void TestDelete()
         {
-            var aaa = Data_User.Current.GetFirst();
-            aaa.Name = "123123";
-            Assert.IsTrue(aaa.Update());
+            Assert.IsTrue(new Data_User().Update());
         }
     }
 }
