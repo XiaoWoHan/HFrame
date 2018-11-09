@@ -14,11 +14,13 @@ namespace HFrame.Web.Default.Service
 {
     public class DefaultService
     {
+        #region 注册
         public static bool Register(ResultModel result, RegisterModel Model)
         {
-            ValidationContext context = new ValidationContext(Model, null, null);
-            List<ValidationResult> results = new List<ValidationResult>();
-            var valid = Validator.TryValidateObject(Model, context, results, true);
+            #region 表单验证
+            ValidationContext context = new ValidationContext(Model, null, null);///创建验证实体
+            List<ValidationResult> results = new List<ValidationResult>();///返回的ErrorMsgList
+            var valid = Validator.TryValidateObject(Model, context, results, true);///执行验证
             if (!valid)
             {
                 result.ErrorCode = -1;
@@ -31,9 +33,11 @@ namespace HFrame.Web.Default.Service
                 result.ErrorMsg = $"注册失败 验证码错误";
                 return false;
             }
+            #endregion
 
-            ValidateCodeHelper.DeleteCodeString();
+            ValidateCodeHelper.DeleteCodeString();//清除验证码
 
+            #region 注册方法
             var UserOID = Guid.NewGuid().ToString();
             var UserModel = new Data_User()
             {
@@ -47,7 +51,11 @@ namespace HFrame.Web.Default.Service
                 CreateTime = DateTime.Now
             };
             return UserModel.Add();
+            #endregion
         }
+        #endregion
+
+        #region 登陆
         public static bool Login(ResultModel result, LoginModel Model)
         {
             #region 模型表单验证
@@ -79,5 +87,7 @@ namespace HFrame.Web.Default.Service
                 return false;
             }
         }
+        //UNDONE （未添加当前登陆状态验证，存储登陆状态）
+        #endregion
     }
 }

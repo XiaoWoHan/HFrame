@@ -32,8 +32,8 @@ namespace HFrame.Web.Default.Model
         /// <summary>
         /// 联系电话
         /// </summary>
+        [Phone(ErrorMessage = "联系电话不正确")]
         [Required(ErrorMessage = "请输入联系电话")]
-        [Phone(ErrorMessage ="联系电话不正确")]
         public string Telephone { get; set; }
         /// <summary>
         /// 验证码
