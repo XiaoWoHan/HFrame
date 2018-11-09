@@ -4,9 +4,11 @@ using System.Text;
 
 namespace HFrame.Common.Helper
 {
-    public delegate void FileWatchEventHandler(object sender, EventArgs e);
-    class EventHelper
+    /// <summary>
+    /// 事件帮助类
+    /// </summary>
+    public class EventHelper
     {
         
-    }
+    }//TODO 事件帮助类未完成
 }

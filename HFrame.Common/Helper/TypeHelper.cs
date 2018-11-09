@@ -36,6 +36,7 @@ namespace HFrame.Common.Helper
         /// <returns></returns>
         public static DateTime StringToDateTime(string s)
         {
+
             return StringToDateTime(s, DateTime.Now);
         }
         #endregion

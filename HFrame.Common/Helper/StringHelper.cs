@@ -11,33 +11,18 @@ namespace HFrame.Common.Helper
     /// </summary>
     public static class StringHelper
     {
-        #region 字符串长度
         /// <summary>
-        /// 获得字符串的长度,一个汉字的长度为1
+        /// 获得字符串的长度,一个汉字的长度为2
         /// </summary>
-        public static int GetStringLength(this string s)
-        {
-            if (!string.IsNullOrEmpty(s))
-                return Encoding.Default.GetBytes(s).Length;
-
-            return 0;
-        }
+        public static int StringByteLength(this string s) => String.IsNullOrEmpty(s) ? 0 : Encoding.Default.GetBytes(s).Length;
         /// <summary>
-        /// 获取字符串长度
+        /// Guid随机字符串
         /// </summary>
-        /// <param name="s"></param>
-        /// <param name="IsBytes">true:汉字为2，false:汉字为1</param>
-        /// <returns></returns>
-        public static int GetStringLength(this string s,bool IsBytes = false)
-        {
-            if (!String.IsNullOrEmpty(s) && IsBytes)
-                return System.Text.Encoding.Default.GetBytes(s).Length;
-            else if (!String.IsNullOrEmpty(s) && !IsBytes)
-                return GetStringLength(s);
-            else return 0;
-        }
-        #endregion
-
+        public static string GuidStr => Guid.NewGuid().ToString();
+        /// <summary>
+        /// 当前时间字符
+        /// </summary>
+        public static string TimeStr => DateTime.Now.ToString("yyyyMMddHHmmssffff");
         #region 分割字符串
 
         /// <summary>
@@ -46,7 +31,7 @@ namespace HFrame.Common.Helper
         /// <param name="sourceStr">源字符串</param>
         /// <param name="splitStr">分隔字符串</param>
         /// <returns></returns>
-        public static string[] SplitString(string sourceStr, string splitStr)
+        public static string[] SplitString(this string sourceStr, string splitStr)
         {
             if (string.IsNullOrEmpty(sourceStr) || string.IsNullOrEmpty(splitStr))
                 return new string[0] { };
@@ -61,18 +46,13 @@ namespace HFrame.Common.Helper
 
         }
 
-        /// <summary>
-        /// 分割字符串
-        /// </summary>
-        /// <param name="sourceStr">源字符串</param>
-        /// <returns></returns>
-        public static string[] SplitString(string sourceStr)
-        {
-            return SplitString(sourceStr, ",");
-        }
-
         #endregion
-
+        /// <summary>
+        /// 包含在内
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <param name="inValues"></param>
+        /// <returns></returns>
         public static bool IsContainsIn(this string thisValue, params string[] inValues)
         {
             return inValues.Any(it => thisValue.Contains(it));
