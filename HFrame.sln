@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HFrame.DAL.Test", "HFrame.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HFrame.Common.Test", "HFrame.Common.Test\HFrame.Common.Test.csproj", "{933F240D-CB22-4392-8E2B-4E3B1AAAD2C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HFrame.Web.Tests", "HFrame.Web.Tests\HFrame.Web.Tests.csproj", "{91408149-882D-4D7F-8DEB-F16D1CB5291F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{933F240D-CB22-4392-8E2B-4E3B1AAAD2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{933F240D-CB22-4392-8E2B-4E3B1AAAD2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{933F240D-CB22-4392-8E2B-4E3B1AAAD2C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91408149-882D-4D7F-8DEB-F16D1CB5291F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91408149-882D-4D7F-8DEB-F16D1CB5291F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91408149-882D-4D7F-8DEB-F16D1CB5291F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91408149-882D-4D7F-8DEB-F16D1CB5291F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

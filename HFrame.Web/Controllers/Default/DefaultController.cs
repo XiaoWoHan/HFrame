@@ -22,7 +22,7 @@ namespace HFrame.Web.Controllers
         public ActionResult ValidateCodeImg()
         {
             var Code = ValidateCodeHelper.GetRandomCode(7);
-            CacheHelper.Current.AddOrUpdate("LoginValidateCode", Code); //验证码存放在TempData中
+            ValidateCodeHelper.SetCodeString(Code);
             return File(ValidateCodeHelper.GetVerifyCodeImg(Code), "image/Jpeg");
         }
         #endregion

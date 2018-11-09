@@ -13,7 +13,11 @@ namespace HFrame.Common.Helper
     public class ValidateCodeHelper
     {
         #region 属性
-        public static string CurrentCodeString => Cache.CacheHelper.Current.Get("LoginValidateCode")?.ToString()?.ToLower();
+        private const string CACHECODENAME = "LoginValidateCode";
+
+        public static string CurrentCodeString => Cache.CacheHelper.Current.Get(CACHECODENAME)?.ToString()?.ToLower();
+        public static bool SetCodeString(string Code) => Cache.CacheHelper.Current.Add(CACHECODENAME, Code);
+        public static bool DeleteCodeString() => Cache.CacheHelper.Current.Remove(CACHECODENAME);
         #endregion
 
         #region 字符验证公共方法

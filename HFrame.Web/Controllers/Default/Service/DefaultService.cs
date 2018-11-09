@@ -31,8 +31,9 @@ namespace HFrame.Web.Default.Service
                 result.ErrorMsg = $"注册失败 验证码错误";
                 return false;
             }
-            #region 模型表单验证
-            #endregion
+
+            ValidateCodeHelper.DeleteCodeString();
+
             var UserOID = Guid.NewGuid().ToString();
             var UserModel = new Data_User()
             {

@@ -10,12 +10,8 @@ namespace HFrame.Common.Test
         [TestMethod]
         public void TestMethod1()
         {
-            for(var i = 0; i <= 100; i++)
-            {
-                Assert.IsTrue(LogHelper.Log("TestOneLog"));
-                Assert.IsTrue(LogHelper.LogError("TestOneLogError"));
-                Assert.IsNotNull(LogHelper.GetErrors());
-            }
+            var aaa = LogHelper.GetErrors();
+            Assert.IsNotNull(aaa);
         }
     }
 }
