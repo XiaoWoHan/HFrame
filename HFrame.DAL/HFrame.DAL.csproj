@@ -52,9 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data_User.cs" />
-    <Compile Include="DbBase.cs" />
-    <Compile Include="DBSqlHelper.cs" />
-    <Compile Include="DBTablePropertie.cs" />
+    <Compile Include="DbBase\DbBase.cs" />
+    <Compile Include="SqlHelper\DBSqlHelper.cs" />
+    <Compile Include="DbBase\DBTablePropertie.cs" />
     <Compile Include="LambdaHelper\EntityModel\DataParameter.cs" />
     <Compile Include="LambdaHelper\ExpressionTypeCast.cs" />
     <Compile Include="LambdaHelper\LambdaRouter.cs" />

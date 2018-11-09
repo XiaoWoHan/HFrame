@@ -23,7 +23,8 @@ namespace HFrame.Common.Helper
         /// 当前时间字符
         /// </summary>
         public static string TimeStr => DateTime.Now.ToString("yyyyMMddHHmmssffff");
-        #region 分割字符串
+
+        #region 方法
 
         /// <summary>
         /// 分割字符串
@@ -46,7 +47,6 @@ namespace HFrame.Common.Helper
 
         }
 
-        #endregion
         /// <summary>
         /// 包含在内
         /// </summary>
@@ -57,5 +57,6 @@ namespace HFrame.Common.Helper
         {
             return inValues.Any(it => thisValue.Contains(it));
         }
+        #endregion
     }
 }
